@@ -1,0 +1,10 @@
+services:
+  untis-bot:
+    build: .
+    container_name: untis-discord-bot
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./meine_stunden.json:/app/meine_stunden.json
+      # Falls der Bot Fehler logs schreiben soll, kannst du auch den Ordner mounten
