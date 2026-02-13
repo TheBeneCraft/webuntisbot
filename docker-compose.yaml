@@ -1,10 +1,19 @@
 services:
   untis-bot:
-    build: .
+    # Hier ziehen wir das fertige Image von GitHub statt lokal zu bauen
+    image: ghcr.io/thebenecraft/webuntisbot:latest
     container_name: untis-discord-bot
     restart: always
     env_file:
       - .env
     volumes:
-      - ./meine_stunden.json:/app/meine_stunden.json
-      # Falls der Bot Fehler logs schreiben soll, kannst du auch den Ordner mounten
+      - ./meine_stunden.json:/usr/src/app/meine_stunden.json
+
+  # Dieser Dienst prüft alle 5 Minuten auf Updates bei GitHub
+  watchtower:
+    image: containrrr/watchtower
+    container_name: watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: --interval 300 --cleanup
+    restart: always
