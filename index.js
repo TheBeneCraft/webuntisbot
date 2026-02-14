@@ -1,5 +1,5 @@
 import { Client, GatewayIntentBits } from "discord.js";
-import fetch from "node-fetch"; 
+//import fetch from "node-fetch"; 
 import { format, getWeek } from "date-fns";
 import cron from "node-cron";
 import fs from "fs";
